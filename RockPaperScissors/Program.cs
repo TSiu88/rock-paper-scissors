@@ -24,7 +24,7 @@ class Program
     }
     else
     {
-      Console.WriteLine("Sorry, I don't understand. Please, choose from options above");
+      Console.WriteLine("Sorry, I don't understand. Please, choose from the available options.");
       StartGame();
     }
   }
@@ -35,14 +35,38 @@ class Program
     string response = Console.Readline().toLower();
     if (response == "c")
     {
+      Game.hasComputerPlayer = true;
+      PlayerChoice(0);
+      Game.ShowResult();
     }
     else if (response == "p")
     {
+      int numberOfPlayers = 2;
+      for (int i=0; i < numberOfPlayers; i++)
+      {
+        PlayerChoice(i);
+      }
+      Game.ShowResult();
     }
     else
     {
-      Console.WriteLine("Sorry, I don't understand. Please, choose from options above");
+      Console.WriteLine("Sorry, I don't understand. Please, choose from the available options.");
       SecondQuestion();
+    }
+  }
+
+  public static void PlayerChoice(int number)
+  {
+    Console.WriteLine($"Player {number+1}, what do you choose: Rock, Paper, or Scissors?");
+    string playerChoice = Console.ReadLine().toLower();
+    if (playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors")
+    {
+      Game.AddPlayer(playerChoice);
+    }
+    else
+    {
+      Console.WriteLine("Sorry, I don't understand. Please, choose from the available options.");
+      PlayerChoice(number);
     }
   }
 
