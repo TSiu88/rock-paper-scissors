@@ -5,28 +5,15 @@ namespace Play.Models
 {
   public static class Game
   {
-    public List <Player> players;
-    public bool hasComputerPlayer;
+    public static List <Player> players = new List <Player> () {};
 
-    public Game()
+    public static void AddPlayer(string choice)
     {
-      players = new List <Player> () {};
-      hasComputerPlayer = false;
-    }
-
-    public void AddPlayer(string choice)
-    {
-      Player newPlayer = new Player();
-      newPlayer.Property = choice;
+      Player newPlayer = new Player(choice);
       players.Add(newPlayer);
     }
 
-    public List<Player> GetPlayers()
-    {
-      return players;
-    }
-
-    private string ComparePlayers(Player p1, Player p2)
+    public static string ComparePlayers(Player p1, Player p2)
     {
       if (p1.Property == p2.Property)
       {
@@ -34,15 +21,15 @@ namespace Play.Models
       }
       else if ( p1.Property == "rock" && p2.Property == "scissors" || p1.Property == "paper" && p2.Property == "rock" || p1.Property == "scissors" && p2.Property == "paper")
       {
-        return "Win";
+        return $"Player {p1.Number} Wins";
       }
       else
       {
-        return "Lose";
+        return $"Player {p2.Number} Wins";
       }
     }
 
-    public string ShowResult()
+    public static string ShowResult()
     {
       for(int i =0; i < players.Count -1; i++)
       {
@@ -51,14 +38,21 @@ namespace Play.Models
         {
           Player p2 = players[j];
           string result = ComparePlayers(p1, p2);
-          AddResults(p1, p2, result);
+          return result;
+          //AddResults(p1, p2, result);
         }
       }
+      return "error";
     }
 
-    private void AddResults(Player first, Player second, string result)
+    private static void AddResults(Player first, Player second, string result)
     {
       
+    }
+
+    public static void ClearAll()
+    {
+      players.Clear();
     }
   }
 }

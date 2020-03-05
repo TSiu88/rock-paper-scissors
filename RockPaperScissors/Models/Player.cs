@@ -1,12 +1,14 @@
+using System;
+
 namespace Play.Models
 {
-  class Player
+  public class Player
   {
     public string Property { get; set; }
     public int Number { get; set; }
-    private static int _currentNumber = 0;
+    private static int _currentNumber = 1;
 
-    Player(string property)
+    public Player(string property)
     {
       Property = property; 
       Number = GetCurrentNumber();
@@ -15,6 +17,11 @@ namespace Play.Models
     private static int GetCurrentNumber()
     {
       return _currentNumber++;
+    }
+
+    public static void ClearAll()
+    {
+      _currentNumber = 1;
     }
   }
 

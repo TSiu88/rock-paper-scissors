@@ -12,7 +12,7 @@ class Program
   public static void StartGame()
   {
     Console.WriteLine("Do you want to play in Rock, Paper, Scissors? Choose Y (for Yes) or N (for No)");
-    string response = Console.Readline().toLower();
+    string response = Console.ReadLine().ToLower();
     if (response == "y")
     {
       SecondQuestion();
@@ -32,11 +32,13 @@ class Program
   public static void SecondQuestion()
   {
     Console.WriteLine ("Do you want to play against player or against computer? Choose P (for Player) or C (for Computer)");
-    string response = Console.Readline().toLower();
+    string response = Console.ReadLine().ToLower();
     if (response == "c")
     {
-      Game.hasComputerPlayer = true;
       PlayerChoice(0);
+      //Game.AddComputer();
+      // string computerChoice = ComputerChoice();
+      // Game.AddPlayer(computerChoice);
       Game.ShowResult();
     }
     else if (response == "p")
@@ -46,7 +48,7 @@ class Program
       {
         PlayerChoice(i);
       }
-      Game.ShowResult();
+      Console.WriteLine(Game.ShowResult());
     }
     else
     {
@@ -58,7 +60,7 @@ class Program
   public static void PlayerChoice(int number)
   {
     Console.WriteLine($"Player {number+1}, what do you choose: Rock, Paper, or Scissors?");
-    string playerChoice = Console.ReadLine().toLower();
+    string playerChoice = Console.ReadLine().ToLower();
     if (playerChoice == "rock" || playerChoice == "paper" || playerChoice == "scissors")
     {
       Game.AddPlayer(playerChoice);
@@ -69,5 +71,14 @@ class Program
       PlayerChoice(number);
     }
   }
+
+  //   public static string ComputerChoice()
+  // {
+  //   string [] allOptions = {"rock", "paper", "scissors"};
+  //   Random rand = new Random();
+  //   int index = rand.Next(allOptions.Length);
+  //   string result = allOptions[index];
+  //   return result;
+  // }
 
 }
