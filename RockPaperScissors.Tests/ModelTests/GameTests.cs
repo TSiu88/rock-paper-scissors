@@ -23,10 +23,27 @@ namespace Play.Test
     }
 
     [TestMethod]
+    public void AddComputer_ComputerAddedToList_ListOfPlayers()
+    {
+      Game.AddPlayer("rock");
+      Game.AddComputer();
+      int result = Game.players.Count;
+      Assert.AreEqual(2, result);
+    }
+
+    [TestMethod]
+    public void ComputerChoice_ChoiceContainedInOptions_OptionChosen()
+    {
+      string [] allOptions = {"rock", "paper", "scissors"};
+      string result = Game.ComputerChoice();
+      CollectionAssert.Contains(allOptions, result);
+    }
+
+    [TestMethod]
     public void ComparePlayers_FindWinner_Player2Wins()
     {
-      Player p1 = new Player("rock");
-      Player p2 = new Player("paper");
+      Player p1 = new Player("rock",false);
+      Player p2 = new Player("paper",false);
       string result = Game.ComparePlayers(p1, p2);
       Assert.AreEqual("Player 2 Wins", result);
     }
@@ -34,8 +51,8 @@ namespace Play.Test
     [TestMethod]
     public void ComparePlayers_FindWinner_Player1Wins()
     {
-      Player p1 = new Player("scissors");
-      Player p2 = new Player("paper");
+      Player p1 = new Player("scissors",false);
+      Player p2 = new Player("paper",false);
       string result = Game.ComparePlayers(p1, p2);
       Assert.AreEqual("Player 1 Wins", result);
     }

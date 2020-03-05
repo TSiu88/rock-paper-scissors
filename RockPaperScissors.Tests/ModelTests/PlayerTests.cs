@@ -16,9 +16,9 @@ namespace Play.Test
     [TestMethod]
     public void GetCurrentNumber_GetPlayerName_PlayerNumber()
     {
-      Player p1 = new Player("rock");
-      Player p2 = new Player("paper");
-      Player p3 = new Player("scissors");
+      Player p1 = new Player("rock",false);
+      Player p2 = new Player("paper",false);
+      Player p3 = new Player("scissors",false);
       int result = p3.Number;
       Assert.AreEqual(3, result);
     }

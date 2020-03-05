@@ -36,10 +36,9 @@ class Program
     if (response == "c")
     {
       PlayerChoice(0);
-      //Game.AddComputer();
-      // string computerChoice = ComputerChoice();
-      // Game.AddPlayer(computerChoice);
-      Game.ShowResult();
+      Game.AddComputer();
+      ShowChoices();
+      Console.WriteLine(Game.ShowResult());
     }
     else if (response == "p")
     {
@@ -48,6 +47,7 @@ class Program
       {
         PlayerChoice(i);
       }
+      ShowChoices();
       Console.WriteLine(Game.ShowResult());
     }
     else
@@ -72,13 +72,20 @@ class Program
     }
   }
 
-  //   public static string ComputerChoice()
-  // {
-  //   string [] allOptions = {"rock", "paper", "scissors"};
-  //   Random rand = new Random();
-  //   int index = rand.Next(allOptions.Length);
-  //   string result = allOptions[index];
-  //   return result;
-  // }
-
+  public static void ShowChoices()
+  {
+    List<Player> AllPlayers = Game.GetPlayers();
+    foreach (Player player in AllPlayers)
+    {
+      if(player.Computer == true)
+      {
+        Console.WriteLine($"Computer: {player.Property}");
+      }
+      else
+      {
+        Console.WriteLine($"Player{player.Number}: {player.Property}");
+      }
+      
+    }
+  }
 }

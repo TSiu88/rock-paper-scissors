@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using System;
 
 namespace Play.Models
 {
@@ -9,9 +9,30 @@ namespace Play.Models
 
     public static void AddPlayer(string choice)
     {
-      Player newPlayer = new Player(choice);
+      Player newPlayer = new Player(choice, false);
       players.Add(newPlayer);
     }
+
+    public static List<Player> GetPlayers()
+    {
+      return players;
+    }
+
+    public static void AddComputer()
+    {
+      string computerChoice = ComputerChoice();
+      Player newPlayer = new Player(computerChoice, true);
+      players.Add(newPlayer);
+    }
+
+    public static string ComputerChoice()
+  {
+    string [] allOptions = {"rock", "paper", "scissors"};
+    Random rand = new Random();
+    int index = rand.Next(allOptions.Length);
+    string result = allOptions[index];
+    return result;
+  }    
 
     public static string ComparePlayers(Player p1, Player p2)
     {
@@ -21,10 +42,18 @@ namespace Play.Models
       }
       else if ( p1.Property == "rock" && p2.Property == "scissors" || p1.Property == "paper" && p2.Property == "rock" || p1.Property == "scissors" && p2.Property == "paper")
       {
+        if (p1.Computer == true)
+        {
+          return "Computer Wins";
+        }
         return $"Player {p1.Number} Wins";
       }
       else
       {
+        if (p2.Computer == true)
+        {
+          return "Computer Wins";
+        }
         return $"Player {p2.Number} Wins";
       }
     }
@@ -43,11 +72,6 @@ namespace Play.Models
         }
       }
       return "error";
-    }
-
-    private static void AddResults(Player first, Player second, string result)
-    {
-      
     }
 
     public static void ClearAll()
